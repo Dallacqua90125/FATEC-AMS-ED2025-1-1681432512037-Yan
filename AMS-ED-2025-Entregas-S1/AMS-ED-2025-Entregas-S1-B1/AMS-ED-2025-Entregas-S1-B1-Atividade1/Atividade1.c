@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 void CalcularPrecoComDesconto(float *valor, float percentual) {
     *valor -= (*valor * percentual / 100);
 }
