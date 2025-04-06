@@ -16,13 +16,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Definição de constantes
 #define MAX_NOME 50
 #define MAX_DESCRICAO 100
 #define MAX_STATUS 20
 #define NUM_STATUS 4
 
-// Enumeração para os status possíveis
 typedef enum {
     STATUS_PENDENTE = 1,
     STATUS_EM_PREPARO = 2,
@@ -30,7 +28,6 @@ typedef enum {
     STATUS_ENTREGUE = 4
 } StatusPedido;
 
-// Estrutura para armazenar informações do pedido
 typedef struct {
     int numero;
     char cliente[MAX_NOME];
@@ -40,13 +37,11 @@ typedef struct {
     struct Pedido* proximo;
 } Pedido;
 
-// Estrutura da pilha
 typedef struct {
     Pedido* topo;
     int tamanho;
 } Pilha;
 
-// Funções auxiliares de entrada
 static void limparBuffer(void) {
     char c;
     while ((c = getchar()) != '\n' && c != EOF);
@@ -71,7 +66,6 @@ static int lerInteiro(const char* mensagem) {
     }
 }
 
-// Funções de manipulação da pilha
 Pilha* criarPilha(void) {
     Pilha* p = (Pilha*)malloc(sizeof(Pilha));
     if (!p) {
@@ -122,7 +116,6 @@ Pedido* top(Pilha* p) {
     return p ? p->topo : NULL;
 }
 
-// Funções de busca e atualização
 Pedido* buscarPedido(Pilha* p, int numero) {
     if (!p) return NULL;
     
@@ -144,7 +137,6 @@ void atualizarStatus(Pilha* p, int numero, StatusPedido novoStatus) {
     }
 }
 
-// Funções de exibição
 const char* statusParaString(StatusPedido status) {
     switch (status) {
         case STATUS_PENDENTE: return "Pendente";
@@ -177,7 +169,6 @@ void listarPedidos(Pilha* p) {
     }
 }
 
-// Função de liberação de memória
 void liberarPilha(Pilha* p) {
     if (!p) return;
     
@@ -188,7 +179,6 @@ void liberarPilha(Pilha* p) {
     free(p);
 }
 
-// Função para seleção de status
 StatusPedido selecionarStatus(void) {
     printf("\nStatus do pedido:\n");
     printf("1 - Pendente\n");
